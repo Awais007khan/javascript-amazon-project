@@ -81,12 +81,44 @@ products.forEach((product)=>{
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">Add to Cart</button>
+          <button class="add-to-cart-button button-primary js-add-to-cart"
+          data-product-id = "${product.id}" 
+          >Add to Cart</button>
         </div>`
         ;
-
+// here above i have used the data attribute of HTML.So we attached the product name to the button using the data-attribute of html then we push it into the cart array using the push method
 
 });
-console.log(productsHTML);
+//console.log(productsHTML);
 document.querySelector('.js-products-grid')
 .innerHTML = productsHTML;
+
+document.querySelectorAll('.js-add-to-cart')
+.forEach((button)=>{
+    button.addEventListener('click',()=>{
+        //console.log('Added product');
+        const productId = button.dataset.productId;
+
+        let matchingItem;
+        cart.forEach((item)=>{
+
+            if(productId === item.productId){
+                matchingItem = item;
+            }
+        });
+
+        if(matchingItem){
+            matchingItem.quantity += 1;
+        }else{
+             cart.push({
+            productId: productId,
+            quantity: 1
+        });
+            
+        }
+       
+        console.log(cart);
+
+    })
+
+})
