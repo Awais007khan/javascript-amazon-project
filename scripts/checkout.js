@@ -11,7 +11,9 @@ const today = dayjs();
  //console.log(deliveryDate); 
  console.log(deliveryDate.format('dddd, MMMM D')); // taken this format from the library documentation, There`re many other useful features to use
 
-let cartSummaryHTML = '';
+ function renderOrderSummary () {
+
+ let cartSummaryHTML = '';
 
 cart.forEach((cartItem)=>{
     const productId =  cartItem.productId;
@@ -20,7 +22,7 @@ cart.forEach((cartItem)=>{
 
     products.forEach((product)=>{
         if(product.id === productId){
-            matchingProduct = product;
+            matchingProduct = product; 
         }
     });
     //  console.log(matchingProduct);
@@ -162,13 +164,12 @@ container.remove();
     element.addEventListener('click', ()=>{
       const {productId, deliveryOptionId} = element.dataset;
       updateDeliveryOption(productId,deliveryOptionId);
+      renderOrderSummary();
 
 
     })
 
   })
-
-
-
-
 //console.log(cartSummaryHTML);
+ }
+ renderOrderSummary();
