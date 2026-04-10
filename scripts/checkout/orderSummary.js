@@ -4,12 +4,13 @@ import { formatCurrency } from "../utils/money.js";
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js'
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js' // Called "Default Export" : new default way of exporting the something from a file
 import {deliveryOptions, getDeliveryOption} from '../../data/DeliveryOptions.js'
+import { renderPaymentSummary } from "./paymentSummary.js";
 
-hello();
-const today = dayjs();
- const deliveryDate = today.add(7, 'days');
- //console.log(deliveryDate); 
- console.log(deliveryDate.format('dddd, MMMM D')); // taken this format from the library documentation, There`re many other useful features to use
+// hello();
+// const today = dayjs();
+//  const deliveryDate = today.add(7, 'days');
+//  //console.log(deliveryDate); 
+//  console.log(deliveryDate.format('dddd, MMMM D')); // taken this format from the library documentation, There`re many other useful features to use
 
  export function renderOrderSummary () {
 
@@ -138,6 +139,7 @@ document.querySelectorAll('.js-delete-link')
 const container = document.querySelector(`.js-cart-item-container-${productId}`);
 // console.log(container);
 container.remove();
+renderPaymentSummary();
 
 })
   });
@@ -150,6 +152,8 @@ container.remove();
       const {productId, deliveryOptionId} = element.dataset;
       updateDeliveryOption(productId,deliveryOptionId);
       renderOrderSummary();
+      renderPaymentSummary();
+
 
 
     })
