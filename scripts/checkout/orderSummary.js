@@ -1,9 +1,9 @@
 import { cart, removeFromCart, updateDeliveryOption } from "../../data/cart.js"; // Called "Named Export" 
-import { products } from "../../data/products.js";
+import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js'
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js' // Called "Default Export" : new default way of exporting the something from a file
-import {deliveryOptions} from '../../data/DeliveryOptions.js'
+import {deliveryOptions, getDeliveryOption} from '../../data/DeliveryOptions.js'
 
 hello();
 const today = dayjs();
@@ -18,28 +18,13 @@ const today = dayjs();
 cart.forEach((cartItem)=>{
     const productId =  cartItem.productId;
 
-    let matchingProduct;
+    const matchingProduct = getProduct(productId);
 
-    products.forEach((product)=>{
-        if(product.id === productId){
-            matchingProduct = product; 
-        }
-    });
+    
     //  console.log(matchingProduct);
     const deliveryOptionId = cartItem.deliveryOptionId;
 
-    let deliveryOption;
-
-    // now we loop through the delivery Options
-
-    deliveryOptions.forEach((option)=>{
-
-      if(option.id === deliveryOptionId){
-        
-        deliveryOption = option;
-      }
-
-    });
+    const deliveryOption = getDeliveryOption(deliveryOptionId);
    
     const today = dayjs();
     const deliveryDate = today.add(
