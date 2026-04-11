@@ -11,7 +11,7 @@ if (formatCurrency(2095) === '20.95') {
 // we`re using testing method to test diff test cases for our code to work properly
 
 // Edge Cases - test with values that are tricky
-console.log('works with 0');
+console.log('works with 0'); 
 if(formatCurrency(0) === '0.00') {
     console.log('passed again');
 
