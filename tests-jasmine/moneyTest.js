@@ -5,3 +5,4 @@ describe('test suite: formatCurrency', ()=>{
         expect(formatCurrency(2095)).toEqual('20.95');
     });
 });
+// do the same for the rest of the cases as well 
